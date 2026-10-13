@@ -1,0 +1,195 @@
+/**
+ * 生职迹 Career Trail — 全局样式与设计令牌
+ *
+ * 设计系统：High-Fidelity Claymorphism
+ *   核心概念 =「数字黏土」。界面不是平面，而是一堆被柔和顶光照射的实体：
+ *   外阴影定义离地高度、左上高光模拟受光面、内阴影做边缘反弹光。
+ *
+ * 本文件是设计令牌的**唯一真源**：
+ *   颜色以 RGB 通道值写入 :root，由 tailwind.config.js 映射为语义类名
+ *   （bg-cv-bg / text-cv-fg / shadow-clayCard …）。改配色只改这里。
+ */
+
+/* 字体：Nunito（标题/数字，圆润终端）+ DM Sans（正文）。
+   黏土风只认这两种，不用等宽字体——标签改用 Nunito 大写 + 字距。 */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=DM+Sans:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ---------- 表面（糖果店调色板：淡薰衣草白画布，绝不用纯白） ---------- */
+    --cv-bg: 244 241 250; /* #F4F1FA 画布 */
+    --cv-card: 255 255 255; /* 抬升表面 */
+    --cv-surface: 239 235 245; /* #EFEBF5 凹陷表面（输入框填充） */
+    --cv-muted: 240 236 248; /* 次级填充 */
+    --cv-border: 227 221 240; /* 极软的分隔线（黏土世界里几乎没有硬边框） */
+    --cv-ink: 51 47 58; /* #332F3A 最深色，用于"凸起块"上的文字与深色胶囊 */
+
+    /* ---------- 文字（最浅只到 muted-fg，再浅就不达 AA） ---------- */
+    --cv-fg: 51 47 58; /* #332F3A 软炭黑 */
+    --cv-muted-fg: 99 95 105; /* #635F69 深薰衣草灰 —— 正文/标签的下限 */
+
+    /* ---------- 强调色 ---------- */
+    --cv-accent: 124 58 237; /* #7C3AED 紫罗兰：主 CTA / 链接 / 品牌 */
+    --cv-accent-2: 167 139 250; /* #A78BFA 浅紫：渐变起点（让按钮不发闷） */
+    --cv-pink: 219 39 119; /* #DB2777 热粉：渐变里的第二情绪 */
+    --cv-sky: 14 165 233; /* #0EA5E9 天蓝：信息类 / 背景光斑 */
+    --cv-ok: 16 185 129; /* #10B981 翡翠：勾选与正向指标 */
+    --cv-warn: 245 158 11; /* #F59E0B 琥珀：提醒 */
+    --cv-danger: 239 68 68; /* #EF4444 糖果红：破坏性动作 */
+
+    /* ---------- 圆角（绝对不用 < 20px；黏土世界没有尖角） ---------- */
+    --r-sm: 14px;
+    --r-md: 20px;
+    --r-lg: 24px;
+    --r-xl: 32px;
+    --r-2xl: 40px;
+    --r-3xl: 48px;
+
+    /* ---------- 阴影：四层堆叠的"黏土物理引擎" ---------- */
+    /* 凸起（深入地面的大容器） */
+    --sh-clay:
+      30px 30px 60px rgb(205 198 217), -30px -30px 60px rgb(255 255 255),
+      inset 10px 10px 20px rgb(139 92 246 / 0.05), inset -10px -10px 20px rgb(255 255 255 / 0.8);
+    /* 悬浮卡片 */
+    --sh-card:
+      16px 16px 32px rgb(160 150 180 / 0.2), -10px -10px 24px rgb(255 255 255 / 0.9),
+      inset 6px 6px 12px rgb(139 92 246 / 0.03), inset -6px -6px 12px rgb(255 255 255);
+    /* 悬浮卡片 hover（抬得更高，影子更大更散） */
+    --sh-card-hover:
+      26px 26px 50px rgb(160 150 180 / 0.3), -12px -12px 28px rgb(255 255 255 / 0.95),
+      inset 6px 6px 12px rgb(139 92 246 / 0.05), inset -6px -6px 12px rgb(255 255 255);
+    /* 强凸起（可点击：带自身颜色的投影） */
+    --sh-button:
+      12px 12px 24px rgb(139 92 246 / 0.3), -8px -8px 16px rgb(255 255 255 / 0.4),
+      inset 4px 4px 8px rgb(255 255 255 / 0.4), inset -4px -4px 8px rgb(0 0 0 / 0.1);
+    --sh-button-hover:
+      16px 18px 34px rgb(139 92 246 / 0.42), -8px -8px 18px rgb(255 255 255 / 0.5),
+      inset 4px 4px 8px rgb(255 255 255 / 0.45), inset -4px -4px 8px rgb(0 0 0 / 0.12);
+    /* 凹陷（输入框、按下的按钮） */
+    --sh-pressed: inset 10px 10px 20px rgb(217 212 227), inset -10px -10px 20px rgb(255 255 255);
+    --sh-pressed-sm: inset 5px 5px 10px rgb(217 212 227), inset -4px -4px 9px rgb(255 255 255);
+    /* 轻量凸起（小徽章、胶囊） */
+    --sh-soft:
+      8px 8px 18px rgb(160 150 180 / 0.22), -6px -6px 14px rgb(255 255 255 / 0.85),
+      inset 2px 2px 5px rgb(255 255 255 / 0.6), inset -2px -2px 5px rgb(0 0 0 / 0.04);
+    /* 彩色圆球（统计球） */
+    --sh-orb:
+      10px 10px 22px rgb(124 58 237 / 0.28), -6px -6px 14px rgb(255 255 255 / 0.6),
+      inset 3px 3px 6px rgb(255 255 255 / 0.35), inset -3px -3px 6px rgb(0 0 0 / 0.08);
+    /* 强调色光晕（CTA 悬浮时） */
+    --sh-glow: 0 10px 30px rgb(124 58 237 / 0.35);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: rgb(var(--cv-bg));
+  }
+
+  body {
+    @apply bg-cv-bg text-cv-fg antialiased;
+    font-family:
+      'DM Sans', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+      'Microsoft YaHei', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.625;
+  }
+
+  /* 标题一律 Nunito，且比 Tailwind 默认更紧的字距 —— 圆润字体放大后会显散 */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: 'Nunito', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* 只给键盘聚焦出环：鼠标点击不出 */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: rgb(var(--cv-accent) / 0.2);
+  }
+
+  /* 浅色细滚动条，与黏土表面同族 */
+  .cv-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(160 150 180 / 0.4) transparent;
+  }
+  .cv-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .cv-scroll::-webkit-scrollbar-thumb {
+    background: rgb(160 150 180 / 0.35);
+    border-radius: 9999px;
+  }
+  .cv-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer components {
+  /* 玻璃黏土：半透明白 + 背景模糊，让身后的彩色光斑透上来。
+     这是这套设计里卡片的标准材质。 */
+  .clay-glass {
+    background-color: rgb(255 255 255 / 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .clay-glass-strong {
+    background-color: rgb(255 255 255 / 0.82);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+}
+
+@layer utilities {
+  /* 大标题的糖果渐变（仅用于 text-5xl 以上的字级，小字会读不清） */
+  .clay-text-gradient {
+    background-image: linear-gradient(
+      100deg,
+      rgb(var(--cv-fg)) 0%,
+      rgb(var(--cv-accent)) 55%,
+      rgb(var(--cv-pink)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* 入场动画起点（由 <Reveal> 切 data-shown 触发）。
+     用带轻微回弹的曲线，让"黏土"有弹性而不是硬切。 */
+  .cv-reveal {
+    opacity: 0;
+    transform: translateY(32px) scale(0.985);
+    transition:
+      opacity 0.7s cubic-bezier(0.34, 1.4, 0.64, 1),
+      transform 0.8s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  .cv-reveal[data-shown='true'] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 尊重系统的减弱动效偏好：不做入场位移，也不跑无限动画 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .cv-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

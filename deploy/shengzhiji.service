@@ -1,0 +1,26 @@
+# 生职迹 Career Trail · systemd 服务单元
+# 安装位置：/etc/systemd/system/shengzhiji.service
+# 由 deploy/server-setup.sh 自动完成安装，无需手工操作。
+#
+# 部署目录固定为 /opt/shengzhiji（上传代码的位置，见部署指南）。
+
+[Unit]
+Description=Shengzhiji Career Trail (careervault.cn)
+After=network.target
+
+[Service]
+Type=simple
+User=shengzhiji
+Group=shengzhiji
+WorkingDirectory=/opt/shengzhiji
+# 只监听本机回环：外部流量一律经 Nginx 进来
+ExecStart=/opt/shengzhiji/.venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=3
+
+# 基础加固：进程出问题时自动拉起，日志进 journald
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

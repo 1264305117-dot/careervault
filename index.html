@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F4F1FA" />
+    <meta name="description" content="生职迹 Career Trail —— 个人经历库与 AI 简历工作台：沉淀经历、对着 JD 生成简历、导出 PDF / Word" />
+    <!-- 内联 favicon：紫罗兰黏土圆球，避免 /favicon.ico 404 -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23A78BFA'/%3E%3Cstop offset='1' stop-color='%237C3AED'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='13' fill='url(%23g)'/%3E%3Ccircle cx='11.5' cy='10.5' r='4' fill='white' opacity='.35'/%3E%3C/svg%3E"
+    />
+    <!-- 字体走 Google Fonts：提前建连，避免首屏字体闪白 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>生职迹 Career Trail · 个人经历库与 AI 简历</title>
+    <style>
+      /* 首屏兜底底色，与黏土画布同色，避免字体/JS 到位前的白闪 */
+      html { background: #f4f1fa; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

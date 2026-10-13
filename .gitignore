@@ -1,0 +1,15 @@
+.env
+.venv/
+node_modules/
+data/
+dist/
+__pycache__/
+# 构建产物（vite build 输出，可随时重建）
+webapp/
+.verify-dist/
+
+# macOS
+.DS_Store
+
+# 日志
+*.log
