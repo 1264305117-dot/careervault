@@ -13,3 +13,4 @@ webapp/
 
 # 日志
 *.log
+.agents/
